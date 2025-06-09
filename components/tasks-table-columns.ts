@@ -94,9 +94,12 @@ export function getTasksTableColumns(options: GetTasksTableColumnsOptions): Colu
         return h('div', { class: 'max-w-[31.25rem] truncate font-medium' }, value)
       },
       meta: {
-        label: 'Title',
-        variant: 'text'
-      }
+        label: "Title",
+        placeholder: "Search titles...",
+        variant: "text",
+        icon: Text,
+      },
+      enableColumnFilter: true
     },
 
     // Status column

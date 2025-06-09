@@ -106,6 +106,11 @@ export function useDataTable<TData>(options: UseDataTableOptions<TData>) {
   const columnFilters = ref<ColumnFiltersState>([])
   const columnVisibility = ref<VisibilityState>({})
   const rowSelection = ref<RowSelectionState>({})
+  const dataRef = ref<MaybeRef<TData[]>>(toValue(tableOptions.data))
+
+  function setData(newData: TData[]) {
+    dataRef.value = newData
+  }
 
   // Debounced refs for performance
   const debouncedColumnFilters = useDebouncedRef(columnFilters, debounceMs)
@@ -114,6 +119,7 @@ export function useDataTable<TData>(options: UseDataTableOptions<TData>) {
   // Table instance
   const table = useVueTable({
     ...tableOptions,
+    data: dataRef,
     state: {
       pagination: pagination.value,
       sorting: sorting.value,
@@ -193,5 +199,6 @@ export function useDataTable<TData>(options: UseDataTableOptions<TData>) {
     shallow,
     debounceMs,
     throttleMs,
+    setData
   }
 }

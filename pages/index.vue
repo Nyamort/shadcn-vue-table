@@ -33,18 +33,16 @@ import type { Task } from '@/types/vue-data-table'
 import { api } from '@/lib/mock-api'
 import TasksTable from '@/components/TasksTable.vue'
 
-// Données d'exemple - vous devriez les remplacer par vos vraies données
 const data = ref<Task[]>([])
 const pageCount = ref(0)
 const statusCounts = ref<Record<string, number>>({})
 const priorityCounts = ref<Record<string, number>>({})
 const estimatedHoursRange = ref<[number, number]>([0, 100])
 
-// Fonction pour charger les données
 const loadData = async () => {
   try {
     const [tasksResult, statusCountsResult, priorityCountsResult, hoursRangeResult] = await Promise.all([
-      api.getTasks(1, 100), // Charger toutes les tâches pour la démo
+      api.getTasks(1, 100),
       api.getTaskStatusCounts(),
       api.getTaskPriorityCounts(),
       api.getEstimatedHoursRange()
